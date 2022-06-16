@@ -9,7 +9,7 @@ import java.net.URL;
 public class ImageProcessing {
 
 
-    public static JLabel colorShiftLeft (URL url) {
+    public static JLabel colorShiftRight(URL url) {
         JLabel processPic = new JLabel();
         try {
             BufferedImage bufferedImage = ImageIO.read(url);
@@ -34,7 +34,7 @@ public class ImageProcessing {
 
         return processPic;
     }
-    public static JLabel colorShiftRight(URL url) {
+    public static JLabel colorShiftLeft(URL url) {
         JLabel processPic = new JLabel();
         try {
             BufferedImage bufferedImage = ImageIO.read(url);
