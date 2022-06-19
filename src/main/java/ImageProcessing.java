@@ -9,139 +9,142 @@ import java.net.URL;
 public class ImageProcessing {
 
 
-    public static JLabel colorShiftRight(URL url) {
+    public static JLabel colorShiftRight(BufferedImage image) {
         JLabel processPic = new JLabel();
-        try {
-            BufferedImage bufferedImage = ImageIO.read(url);
-            int width = bufferedImage.getWidth();
-            int height = bufferedImage.getHeight();
+        BufferedImage newImage=new BufferedImage(image.getWidth(),image.getHeight(),image.getType());
+        int width = newImage.getWidth();
+            int height = newImage.getHeight();
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    int currentPixel = bufferedImage.getRGB(x, y);
+                    int currentPixel = image.getRGB(x, y);
                     Color color = new Color(currentPixel);
                     int red = color.getRed();
                     int green = color.getGreen();
                     int blue = color.getBlue();
                     Color newColor = new Color(blue, red, green);
-                    bufferedImage.setRGB(x, y, newColor.getRGB());
+                    newImage.setRGB(x, y, newColor.getRGB());
                 }
             }
-            processPic = ImageTransferring.minimizeImage(width, height, bufferedImage);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+            processPic = ImageTransferring.minimizeImage(width, height, newImage);
         return processPic;
     }
-    public static JLabel colorShiftLeft(URL url) {
+
+    public static JLabel colorShiftLeft(BufferedImage image) {
         JLabel processPic = new JLabel();
-        try {
-            BufferedImage bufferedImage = ImageIO.read(url);
-            int width = bufferedImage.getWidth();
-            int height = bufferedImage.getHeight();
+        BufferedImage newImage=new BufferedImage(image.getWidth(),image.getHeight(),image.getType());
+
+        int width = newImage.getWidth();
+            int height = newImage.getHeight();
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    int currentPixel = bufferedImage.getRGB(x, y);
+                    int currentPixel = image.getRGB(x, y);
                     Color color = new Color(currentPixel);
                     int red = color.getRed();
                     int green = color.getGreen();
                     int blue = color.getBlue();
                     Color newColor = new Color(green, blue, red);
-                    bufferedImage.setRGB(x, y, newColor.getRGB());
+                    newImage.setRGB(x, y, newColor.getRGB());
                 }
             }
-            processPic = ImageTransferring.minimizeImage(width, height, bufferedImage);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+            processPic = ImageTransferring.minimizeImage(width, height, newImage);
         return processPic;
     }
-    public static JLabel grayScale(URL url) {
+
+    public static JLabel grayScale(BufferedImage image) {
         JLabel processPic = new JLabel();
-        try {
-            BufferedImage bufferedImage = ImageIO.read(url);
-            int width = bufferedImage.getWidth();
-            int height = bufferedImage.getHeight();
+        BufferedImage newImage=new BufferedImage(image.getWidth(),image.getHeight(),image.getType());
+
+            int width = newImage.getWidth();
+            int height = newImage.getHeight();
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    int currentPixel = bufferedImage.getRGB(x, y);
+                    int currentPixel = image.getRGB(x, y);
                     Color color = new Color(currentPixel);
                     int red = color.getRed();
                     int green = color.getGreen();
                     int blue = color.getBlue();
-                    int newGray=(red+green+blue)/3;
-                    int newGrayRed=newGray;
-                    int newGrayBlue=newGray;
-                    int newGrayGreen=newGray;
+                    int newGray = (red + green + blue) / 3;
+                    int newGrayRed = newGray;
+                    int newGrayBlue = newGray;
+                    int newGrayGreen = newGray;
                     Color newColor = new Color(newGrayRed, newGrayBlue, newGrayGreen);
-                    bufferedImage.setRGB(x, y, newColor.getRGB());
+                    newImage.setRGB(x, y, newColor.getRGB());
                 }
             }
-            processPic = ImageTransferring.minimizeImage(width, height, bufferedImage);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+            processPic = ImageTransferring.minimizeImage(width, height, newImage);
         return processPic;
     }
-    public static JLabel negativeColor(URL url) {
+
+    public static JLabel negativeColor(BufferedImage image) {
         JLabel processPic = new JLabel();
-        try {
-            BufferedImage bufferedImage = ImageIO.read(url);
-            int width = bufferedImage.getWidth();
-            int height = bufferedImage.getHeight();
+        BufferedImage newImage=new BufferedImage(image.getWidth(),image.getHeight(),image.getType());
+        int width = newImage.getWidth();
+            int height = newImage.getHeight();
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    int currentPixel = bufferedImage.getRGB(x, y);
+                    int currentPixel = image.getRGB(x, y);
                     Color color = new Color(currentPixel);
                     int red = color.getRed();
                     int green = color.getGreen();
                     int blue = color.getBlue();
-                    int newNegativeRed= 255-red;
-                    int newNegativeBlue=255-blue;
-                    int newNegativeGreen=255-green;
+                    int newNegativeRed = 255 - red;
+                    int newNegativeBlue = 255 - blue;
+                    int newNegativeGreen = 255 - green;
                     Color newColor = new Color(newNegativeRed, newNegativeBlue, newNegativeGreen);
-                    bufferedImage.setRGB(x, y, newColor.getRGB());
+                    newImage.setRGB(x, y, newColor.getRGB());
                 }
             }
-            processPic = ImageTransferring.minimizeImage(width, height, bufferedImage);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+            processPic = ImageTransferring.minimizeImage(width, height, newImage);
         return processPic;
     }
-    public static JLabel lighter (URL url) {
+
+    public static JLabel lighter(BufferedImage image) {
         JLabel processPic = new JLabel();
-        try {
-            BufferedImage bufferedImage = ImageIO.read(url);
-            int width = bufferedImage.getWidth();
-            int height = bufferedImage.getHeight();
+        BufferedImage newImage=new BufferedImage(image.getWidth(),image.getHeight(),image.getType());
+            int width = newImage.getWidth();
+            int height = newImage.getHeight();
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    int currentPixel = bufferedImage.getRGB(x, y);
+                    int currentPixel = image.getRGB(x, y);
                     Color color = new Color(currentPixel);
                     int red = color.getRed();
                     int green = color.getGreen();
                     int blue = color.getBlue();
-                    int newLighterRed= (3*(red-128)+128);
-                    int newLighterBlue=(3*(blue-128)+128);
-                    int newLighterGreen=(3*(green-128)+128);
+                    int newLighterRed = tooBright(red);
+                    int newLighterBlue = tooBright(blue);
+                    int newLighterGreen = tooBright(green);
                     Color newColor = new Color(newLighterRed, newLighterBlue, newLighterGreen);
-                    bufferedImage.setRGB(x, y, newColor.getRGB());
+                    newImage.setRGB(x, y, newColor.getRGB());
                 }
             }
-            processPic = ImageTransferring.minimizeImage(width, height, bufferedImage);
+            processPic = ImageTransferring.minimizeImage(width, height, newImage);
+        return processPic;
+    }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+    private static int tooBright(int color) {
+        color += 80;
+        if (color > 255) {
+            color = 255;
         }
+        return color;
+    }
 
+    public static JLabel mirror(BufferedImage image) {
+        JLabel processPic = new JLabel();
+        BufferedImage newImage=new BufferedImage(image.getWidth(),image.getHeight(),image.getType());
+        int width = newImage.getWidth();
+            int height = newImage.getHeight();
+            for (int x = 0; x < width / 2; x++) {
+                for (int y = 0; y < height; y++) {
+                    int currentPixel = image.getRGB(x, y);
+                    Color currentPixelColor = new Color(currentPixel);
+                    int replacePixel = image.getRGB(width - 1 - x, y);
+                    Color replacePixelColor = new Color(replacePixel);
+                    newImage.setRGB(x, y, replacePixelColor.getRGB());
+                    newImage.setRGB(width - 1 - x, y, currentPixelColor.getRGB());
+                }
+            }
+            processPic = ImageTransferring.minimizeImage(width, height, newImage);
         return processPic;
     }
 }
