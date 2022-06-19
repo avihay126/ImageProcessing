@@ -8,4 +8,5 @@ public class Constants {
     public static final String FACEBOOK_URL="https://www.facebook.com/";
     public static final String INITIAL_DRIVER="webdriver.chrome.driver";
     public static final String DRIVER_PATH="C:\\chromeDriver\\chromedriver.exe";
+    public static final String USER_NAME="AIUA1234@WALLA.CO.IL",PASSWORD="AIUA2469";
 }

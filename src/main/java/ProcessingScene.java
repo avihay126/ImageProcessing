@@ -25,15 +25,21 @@ public class ProcessingScene extends JPanel {
         this.textField = Helper.addTextField(this, this.getWidth() / 2 - Constants.TEXT_FIELD_WIDTH / 2, Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
         this.searchButton = Helper.addButton(this, "Get Image", this.textField.getX(), this.textField.getY() + this.textField.getHeight() + Constants.TOP_MARGIN, this.textField.getWidth(), this.textField.getHeight());
         this.searchButton.addActionListener((e) -> {
-            ImageUrl imageUrl=new ImageUrl("dfghj","dfghj","shai givati");
-            processView();
+            ImageUrl imageUrl=new ImageUrl("dfghj","dfghj",this.textField.getText());
+            String url=imageUrl.getImage(imageUrl.getProfileName());
+            if (this.picture!=null){
+                this.remove(picture);
+                this.remove(processPicture);
+                repaint();
+            }
+
+            processView(url);
         });
     }
 
-    private void processView() {
-
+    private void processView(String urlLink) {
         try {
-            this.url = ImageTransferring.getUrl("https://scontent.fhfa1-1.fna.fbcdn.net/v/t31.18172-1/13495603_10208804454302325_4957734764946397361_o.jpg?stp=dst-jpg_p320x320&_nc_cat=104&ccb=1-7&_nc_sid=7206a8&_nc_ohc=1D8lt6BoBRkAX-L-r1R&_nc_ht=scontent.fhfa1-1.fna&oh=00_AT8_gLrlPjn6UL9D_H_eLTAbzWc2qoXpa5plVyFLdP98wA&oe=62D5432D");
+            this.url = ImageTransferring.getUrl(urlLink);
             this.bufferedImage= ImageIO.read(this.url);
         } catch (IOException e) {
             e.printStackTrace();
