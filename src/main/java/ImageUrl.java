@@ -43,28 +43,14 @@ public class ImageUrl {
         try {
             this.driver.findElement(By.cssSelector("a[aria-label='דף הבית'][role='link']"));
             this.driver.get(Constants.FACEBOOK_URL + profileName);
+
         } catch (Exception e) {
             getImage(profileName);
         }
-        temp();
+        List<WebElement> imageElements = this.driver.findElements(By.cssSelector("image[preserveAspectRatio='xMidYMid slice']"));
+        WebElement profileImageElement = imageElements.get(1);
+        return profileImageElement.getAttribute("xlink:href");
 
-        return "dftgyhuj";
-
-    }
-    private void temp(){
-        try {
-            List<WebElement> imageElements = this.driver.findElements(By.cssSelector("image[preserveAspectRatio='xMidYMid slice']"));
-            WebElement profileImageElement = imageElements.get(1);
-            profileImageElement.click();
-            WebElement element =this.driver.findElement(By.cssSelector("img[data-visualcompletion='media-vc-image'][referrerpolicy='origin-when-cross-origin'][class='ji94ytn4 d2edcug0 r9f5tntg r0294ipz']"));
-            String s=element.getAttribute("src");
-            System.out.println(s);
-
-
-        } catch (Exception e) {
-            System.out.println("ghj");
-            temp();
-        }
     }
 
     public String getProfileName() {
