@@ -1,8 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ProcessingScene extends JPanel {
@@ -12,10 +12,12 @@ public class ProcessingScene extends JPanel {
     private JLabel processPicture;
     private URL url;
     private BufferedImage bufferedImage;
+    private ImageIcon backGround;
 
     public ProcessingScene(int x, int y, int width, int height) {
         this.setLayout(null);
         this.setBounds(x, y, width, height);
+        this.backGround=new ImageIcon("imageProcess.png");
         mainView();
         this.setDoubleBuffered(true);
         this.setVisible(true);
@@ -25,7 +27,7 @@ public class ProcessingScene extends JPanel {
         this.textField = Helper.addTextField(this, this.getWidth() / 2 - Constants.TEXT_FIELD_WIDTH / 2, Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
         this.searchButton = Helper.addButton(this, "Get Image", this.textField.getX(), this.textField.getY() + this.textField.getHeight() + Constants.TOP_MARGIN, this.textField.getWidth(), this.textField.getHeight());
         this.searchButton.addActionListener((e) -> {
-            ImageUrl imageUrl=new ImageUrl("dfghj","dfghj",this.textField.getText());
+            ImageUrl imageUrl=new ImageUrl("check","check",this.textField.getText());
             String url=imageUrl.getImage(imageUrl.getProfileName());
             if (this.picture!=null){
                 this.remove(picture);
@@ -49,8 +51,17 @@ public class ProcessingScene extends JPanel {
         this.processPicture = ImageTransferring.readImage(this.url);
         this.processPicture.setBounds(this.getWidth() - this.picture.getWidth() - Constants.RIGHT_MARGIN, 0, this.picture.getWidth(), this.picture.getHeight());
         this.add(this.processPicture);
-        addProcessButtons();
+        this.addProcessButtons();
+        addTittlePic();
+        addTittleLoading();
         repaint();
+    }
+    private void addTittlePic(){
+        Helper.addLabel(this,"After",  (int) (this.picture.getWidth()/2.5),this.picture.getHeight()+15,100,50);
+        Helper.addLabel(this,"Before", (int) (this.getWidth() - this.picture.getWidth()/1.5),this.picture.getHeight()+15,100,50);
+    }
+    private void addTittleLoading(){
+        Helper.addLabel(this,"Loading Please wait...",this.searchButton.getX()+50,Constants.WIN_HEIGHT-150,this.picture.getHeight()+15,50);
     }
 
     private void addProcessButtons() {
@@ -95,6 +106,10 @@ public class ProcessingScene extends JPanel {
         this.processPicture.setBounds(this.getWidth() - this.picture.getWidth() - Constants.RIGHT_MARGIN, 0, this.picture.getWidth(), this.picture.getHeight());
         this.add(this.processPicture);
         repaint();
+    }
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        graphics.drawImage(this.backGround.getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
     }
 }
 

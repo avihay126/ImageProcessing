@@ -20,7 +20,7 @@ public class ImageUrl {
 
     public ImageUrl(String userName, String password, String profileName) {
         this.profileName = changeNameFormat(profileName);
-        initialDriver();
+         initialDriver();
         connectFacebook();
     }
 
