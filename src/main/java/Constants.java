@@ -7,6 +7,6 @@ public class Constants {
     public static final int TOP_MARGIN=15,RIGHT_MARGIN=15;
     public static final String FACEBOOK_URL="https://www.facebook.com/";
     public static final String INITIAL_DRIVER="webdriver.chrome.driver";
-    public static final String DRIVER_PATH="C:\\selenium\\chromedriver.exe";
+    public static final String DRIVER_PATH="C:\\Users\\User\\Desktop\\לימודים עדו\\שנה א\\סמסטר ב\\סדנא לתכנות\\chromedriver_win32\\chromedriver.exe";
     public static final String USER_NAME="AIUA1234@WALLA.CO.IL",PASSWORD="AIUA2469";
 }

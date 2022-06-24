@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,7 +16,7 @@ public class ImageUrl {
     private Thread thread;
 
 
-    public ImageUrl(String userName, String password, String profileName) {
+    public ImageUrl(String profileName) {
         this.profileName = changeNameFormat(profileName);
          initialDriver();
         connectFacebook();

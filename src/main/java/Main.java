@@ -15,5 +15,7 @@ public class Main extends JFrame {
         this.setResizable(false);
         this.add(new ProcessingScene(0,0,Constants.WIN_WIDTH,Constants.WIN_HEIGHT));
         this.setVisible(true);
+        this.setTitle("image processing");
+
     }
 }

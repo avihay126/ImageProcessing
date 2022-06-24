@@ -27,7 +27,7 @@ public class ProcessingScene extends JPanel {
         this.textField = Helper.addTextField(this, this.getWidth() / 2 - Constants.TEXT_FIELD_WIDTH / 2, Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
         this.searchButton = Helper.addButton(this, "Get Image", this.textField.getX(), this.textField.getY() + this.textField.getHeight() + Constants.TOP_MARGIN, this.textField.getWidth(), this.textField.getHeight());
         this.searchButton.addActionListener((e) -> {
-            ImageUrl imageUrl=new ImageUrl("check","check",this.textField.getText());
+            ImageUrl imageUrl=new ImageUrl(this.textField.getText());
             String url=imageUrl.getImage(imageUrl.getProfileName());
             if (this.picture!=null){
                 this.remove(picture);
