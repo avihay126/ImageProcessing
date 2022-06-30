@@ -15,13 +15,14 @@ public class ProcessingScene extends JPanel {
     private ImageIcon backGround;
     private JLabel after;
     private JLabel before;
-    private Thread loading;
+    private JLabel loader;
 
 
     public ProcessingScene(int x, int y, int width, int height) {
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.backGround = new ImageIcon(Constants.BACKGROUND_NAME);
+        this.loader= Helper.addLabel(this, "", this.getWidth() / 2 - Constants.TEXT_FIELD_WIDTH / 4, this.getHeight() * 3 / 4, Constants.TEXT_FIELD_WIDTH / 2, Constants.TEXT_FIELD_HEIGHT);
         mainView();
         this.setDoubleBuffered(true);
         this.setVisible(true);
@@ -32,7 +33,8 @@ public class ProcessingScene extends JPanel {
         this.searchButton = Helper.addButton(this, Constants.SEARCH_BUTTON, this.textField.getX(), this.textField.getY() + this.textField.getHeight() + Constants.TOP_MARGIN, this.textField.getWidth(), this.textField.getHeight());
         this.searchButton.addActionListener((e) -> {
             if (!this.textField.getText().equals("")){
-                addTittleLoading();
+                this.loader.setText(Constants.LOADING_PRINT);
+                repaint();
                 new Thread(() -> {
                     ImageUrl imageUrl = new ImageUrl(this.textField.getText());
                     String url = imageUrl.getImage(imageUrl.getProfileName());
@@ -62,6 +64,7 @@ public class ProcessingScene extends JPanel {
         this.processPicture.setBounds(this.getWidth() - this.picture.getWidth() - Constants.RIGHT_MARGIN, 0, this.picture.getWidth(), this.picture.getHeight());
         this.add(this.processPicture);
         processButtons();
+        this.loader.setText("");
         addTittlePic();
         repaint();
     }
@@ -69,21 +72,6 @@ public class ProcessingScene extends JPanel {
     private void addTittlePic() {
         this.before=Helper.addLabel(this, Constants.BEFORE_TITLE, (int) (this.picture.getWidth() / 2.5), this.picture.getHeight() + Constants.LABEL_MARGIN, Constants.LABEL_WIDTH, Constants.TEXT_FIELD_HEIGHT);
         this.after=Helper.addLabel(this, Constants.AFTER_TITLE, (int) (this.getWidth() - this.picture.getWidth() / 1.5), this.picture.getHeight() + Constants.LABEL_MARGIN, Constants.LABEL_WIDTH, Constants.TEXT_FIELD_HEIGHT);
-    }
-
-    private void addTittleLoading() {
-        this.loading = new Thread(() -> {
-            try {
-                JLabel label = Helper.addLabel(this, Constants.LOADING_PRINT, this.getWidth() / 2 - Constants.TEXT_FIELD_WIDTH / 4, this.getHeight() * 3 / 4, Constants.TEXT_FIELD_WIDTH / 2, Constants.TEXT_FIELD_HEIGHT);
-                repaint();
-                Thread.sleep(Constants.LOADING);
-                label.setVisible(false);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        this.loading.start();
-
     }
 
     private void processButtons() {
