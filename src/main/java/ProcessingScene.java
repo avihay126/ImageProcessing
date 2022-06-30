@@ -67,18 +67,16 @@ public class ProcessingScene extends JPanel {
     }
 
     private void addTittlePic() {
-        this.before=Helper.addLabel(this, Constants.BEFORE_TITLE, (int) (this.picture.getWidth() / 2.5), this.picture.getHeight() + 15, 100, 50);
-        this.after=Helper.addLabel(this, Constants.AFTER_TITLE, (int) (this.getWidth() - this.picture.getWidth() / 1.5), this.picture.getHeight() + 15, 100, 50);
+        this.before=Helper.addLabel(this, Constants.BEFORE_TITLE, (int) (this.picture.getWidth() / 2.5), this.picture.getHeight() + Constants.LABEL_MARGIN, Constants.LABEL_WIDTH, Constants.TEXT_FIELD_HEIGHT);
+        this.after=Helper.addLabel(this, Constants.AFTER_TITLE, (int) (this.getWidth() - this.picture.getWidth() / 1.5), this.picture.getHeight() + Constants.LABEL_MARGIN, Constants.LABEL_WIDTH, Constants.TEXT_FIELD_HEIGHT);
     }
 
     private void addTittleLoading() {
         this.loading = new Thread(() -> {
             try {
-                JLabel label = Helper.addLabel(this, "Loading Please wait...", this.getWidth() / 2 - Constants.TEXT_FIELD_WIDTH / 4, this.getHeight() * 3 / 4, Constants.TEXT_FIELD_WIDTH / 2, Constants.TEXT_FIELD_HEIGHT);
+                JLabel label = Helper.addLabel(this, Constants.LOADING_PRINT, this.getWidth() / 2 - Constants.TEXT_FIELD_WIDTH / 4, this.getHeight() * 3 / 4, Constants.TEXT_FIELD_WIDTH / 2, Constants.TEXT_FIELD_HEIGHT);
                 repaint();
-
-
-                Thread.sleep(10000);
+                Thread.sleep(Constants.LOADING);
                 label.setVisible(false);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -89,36 +87,30 @@ public class ProcessingScene extends JPanel {
     }
 
     private void processButtons() {
-        JButton[] buttons = new JButton[6];
-        buttons[0] = Helper.addButton(this, Constants.FILTER_COLOR_SHIFT_LEFT, this.searchButton.getX(), this.searchButton.getY() + this.searchButton.getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
-        buttons[1] = Helper.addButton(this, Constants.FILTER_COLOR_SHIFT_RIGHT, this.searchButton.getX(), buttons[0].getY() + buttons[0].getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
-        buttons[2] = Helper.addButton(this, Constants.FILTER_NEGATIVE_COLOR, this.searchButton.getX(), buttons[1].getY() + buttons[1].getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
-        buttons[3] = Helper.addButton(this, Constants.FILTER_GRAY_SCALE, this.searchButton.getX(), buttons[2].getY() + buttons[2].getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
-        buttons[4] = Helper.addButton(this, Constants.FILTER_LIGHTER, this.searchButton.getX(), buttons[3].getY() + buttons[3].getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
-        buttons[5] = Helper.addButton(this, Constants.FILTER_MIRROR, this.searchButton.getX(), buttons[4].getY() + buttons[4].getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
-        buttons[0].addActionListener((e) -> {
+        JButton[] buttons = new JButton[Constants.BUTTON_SIZE];
+        buttons[Constants.COLOR_SHIFT_LEFT_BUTTON] = Helper.addButton(this, Constants.FILTER_COLOR_SHIFT_LEFT, this.searchButton.getX(), this.searchButton.getY() + this.searchButton.getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
+        buttons[Constants.COLOR_SHIFT_RIGHT_BUTTON] = Helper.addButton(this, Constants.FILTER_COLOR_SHIFT_RIGHT, this.searchButton.getX(), buttons[Constants.COLOR_SHIFT_LEFT_BUTTON].getY() + buttons[Constants.COLOR_SHIFT_LEFT_BUTTON].getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
+        buttons[Constants.NEGATIVE_COLOR_BUTTON] = Helper.addButton(this, Constants.FILTER_NEGATIVE_COLOR, this.searchButton.getX(), buttons[Constants.COLOR_SHIFT_RIGHT_BUTTON].getY() + buttons[Constants.COLOR_SHIFT_RIGHT_BUTTON].getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
+        buttons[Constants.GRAY_SCALE_BUTTON] = Helper.addButton(this, Constants.FILTER_GRAY_SCALE, this.searchButton.getX(), buttons[Constants.NEGATIVE_COLOR_BUTTON].getY() + buttons[Constants.NEGATIVE_COLOR_BUTTON].getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
+        buttons[Constants.LIGHTER_BUTTON] = Helper.addButton(this, Constants.FILTER_LIGHTER, this.searchButton.getX(), buttons[Constants.GRAY_SCALE_BUTTON].getY() + buttons[Constants.GRAY_SCALE_BUTTON].getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
+        buttons[Constants.MIRROR_BUTTON] = Helper.addButton(this, Constants.FILTER_MIRROR, this.searchButton.getX(), buttons[Constants.LIGHTER_BUTTON].getY() + buttons[Constants.LIGHTER_BUTTON].getHeight() + Constants.TOP_MARGIN, Constants.TEXT_FIELD_WIDTH, Constants.TEXT_FIELD_HEIGHT);
 
+        buttons[Constants.COLOR_SHIFT_LEFT_BUTTON].addActionListener((e) -> {
             changeImage(ImageProcessing.colorShiftLeft(this.bufferedImage));
-
         });
-        buttons[1].addActionListener((e) -> {
+        buttons[Constants.COLOR_SHIFT_RIGHT_BUTTON].addActionListener((e) -> {
             changeImage(ImageProcessing.colorShiftRight(this.bufferedImage));
-
         });
-        buttons[2].addActionListener((e) -> {
+        buttons[Constants.NEGATIVE_COLOR_BUTTON].addActionListener((e) -> {
             changeImage(ImageProcessing.negativeColor(this.bufferedImage));
-
-
         });
-        buttons[3].addActionListener((e) -> {
+        buttons[Constants.GRAY_SCALE_BUTTON].addActionListener((e) -> {
             changeImage(ImageProcessing.grayScale(this.bufferedImage));
-
-
         });
-        buttons[4].addActionListener((e) -> {
+        buttons[Constants.LIGHTER_BUTTON].addActionListener((e) -> {
             changeImage(ImageProcessing.lighter(this.bufferedImage));
         });
-        buttons[5].addActionListener((e) -> {
+        buttons[Constants.MIRROR_BUTTON].addActionListener((e) -> {
             changeImage(ImageProcessing.mirror(this.bufferedImage));
         });
 

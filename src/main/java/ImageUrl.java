@@ -51,7 +51,7 @@ public class ImageUrl {
             getImage(profileName);
         }
         List<WebElement> imageElements = this.driver.findElements(By.cssSelector("image[preserveAspectRatio='xMidYMid slice']"));
-        WebElement profileImageElement = imageElements.get(1);
+        WebElement profileImageElement = imageElements.get(Constants.PROFILE_PIC);
         return profileImageElement.getAttribute("xlink:href");
 
     }

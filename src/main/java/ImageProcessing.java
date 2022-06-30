@@ -78,9 +78,9 @@ public class ImageProcessing {
                 int red = color.getRed();
                 int green = color.getGreen();
                 int blue = color.getBlue();
-                int newNegativeRed = 255 - red;
-                int newNegativeBlue = 255 - blue;
-                int newNegativeGreen = 255 - green;
+                int newNegativeRed = Constants.MAX_RGB - red;
+                int newNegativeBlue = Constants.MAX_RGB - blue;
+                int newNegativeGreen = Constants.MAX_RGB - green;
                 Color newColor = new Color(newNegativeRed, newNegativeBlue, newNegativeGreen);
                 newImage.setRGB(x, y, newColor.getRGB());
             }
@@ -133,9 +133,9 @@ public class ImageProcessing {
     }
 
     private static int tooBright(int color) {
-        color += 80;
-        if (color > 255) {
-            color = 255;
+        color += Constants.BRIGHTEN;
+        if (color > Constants.MAX_RGB) {
+            color = Constants.MAX_RGB;
         }
         return color;
     }

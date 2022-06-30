@@ -25,8 +25,8 @@ public class ImageTransferring {
 
     public static JLabel minimizeImage(int width,int height,BufferedImage bufferedImage){
         while (width>Constants.WIN_WIDTH/2-Constants.TEXT_FIELD_WIDTH/2||height>Constants.WIN_HEIGHT-Constants.TOP_MARGIN){
-            width= (int) (width*0.9);
-            height=(int) (height*0.9);
+            width= (int) (width*Constants.MINIMIZE_TEN_PERCENT);
+            height=(int) (height*Constants.MINIMIZE_TEN_PERCENT);
         }
         JLabel pic=new JLabel();
         pic.setBounds(0,0,width,height);
