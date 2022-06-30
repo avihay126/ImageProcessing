@@ -9,12 +9,6 @@ import java.net.URL;
 public class ImageTransferring {
 
 
-    public static URL getUrl(String urlString) throws MalformedURLException {
-        URL url=new URL(urlString);
-        return url;
-    }
-
-
     public static   JLabel readImage(URL url){
         JLabel pic=new JLabel();
         try {
@@ -36,8 +30,6 @@ public class ImageTransferring {
         }
         JLabel pic=new JLabel();
         pic.setBounds(0,0,width,height);
-        System.out.println(width);
-        System.out.println(height);
         Image image=bufferedImage.getScaledInstance(width,height, Image.SCALE_AREA_AVERAGING);
         pic.setIcon(new ImageIcon(image));
         return pic;

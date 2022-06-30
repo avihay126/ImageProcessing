@@ -13,6 +13,7 @@ public class Main extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setTitle("Facebook");
         this.add(new ProcessingScene(0,0,Constants.WIN_WIDTH,Constants.WIN_HEIGHT));
         this.setVisible(true);
         this.setTitle(Constants.WINDOW_TITLE);

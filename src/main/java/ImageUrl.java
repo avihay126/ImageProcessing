@@ -6,14 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 
 public class ImageUrl {
     private ChromeDriver driver;
     private String profileName;
-    private String profileNameLock;
-    private Thread thread;
+
 
 
     public ImageUrl(String profileName) {
@@ -21,11 +22,15 @@ public class ImageUrl {
          initialDriver();
         connectFacebook();
     }
+    public static URL getUrl(String urlString) throws MalformedURLException {
+        URL url=new URL(urlString);
+        return url;
+    }
 
     private void initialDriver() {
         System.setProperty(Constants.INITIAL_DRIVER, Constants.DRIVER_PATH);
-        ChromeOptions options=new ChromeOptions();
-        options.setHeadless(true);
+//        ChromeOptions options=new ChromeOptions();
+//        options.setHeadless(true);
         this.driver = new ChromeDriver();
     }
 
